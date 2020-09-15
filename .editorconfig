@@ -1,0 +1,10 @@
+root = true
+
+[*]
+
+charset = utf-8                 #文字コードの指定
+end_of_line = lf                #改行コードの設定
+insert_final_newline = true     #最終行の改行設定
+trim_trailing_whitespace = true #文末のスペース削除
+indent_style = space            #スペースを用いる
+indent_size = 2                 #インデントサイズ
