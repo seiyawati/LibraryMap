@@ -48,10 +48,10 @@ function getSystemIDs(userPosition) {
 /*
   ISBNの配列を受け取り，その蔵書が有る図書館の情報を返す関数
   @param Array<string> ISBNs 検索したい本のISBNの配列
+  @param Array<string> userPosition 緯度/経度
   @return dict librarys 蔵書のある図書館の情報の連想配列
 */
-function searchLibrarysByISBNs(ISBNs) {
-    var userPosition = ['35.667339', '139.7148'];
+function searchLibrarysByISBNs(ISBNs, userPosition) {
     var libraryInfomations = getSystemIDs(userPosition);
     var systemIDs = [];
     for (var systemid in libraryInfomations) {
@@ -62,6 +62,7 @@ function searchLibrarysByISBNs(ISBNs) {
     for (var _i = 0, ISBNs_1 = ISBNs; _i < ISBNs_1.length; _i++) {
         var ISBN = ISBNs_1[_i];
         var requestURL = carilURL.replace('{isbn}', ISBN).replace('{systemIDs}', systemIDs.join());
+        console.log(systemIDs.join());
         var response = callAPI(requestURL);
         for (var systemid in response.books[ISBN]) {
             for (var libkey in response.books[ISBN][systemid].libkey) {
@@ -74,16 +75,28 @@ function searchLibrarysByISBNs(ISBNs) {
     return librarys;
 }
 /*
+  bookNamesに対し，蔵書のある図書館を返す関数
+  @param Array<string> bookNames 図書名の配列
+  @param Array<string> userPosition ユーザの現在位置(緯度/経度)
+  @return dict librarys 蔵書の有る図書館の情報
+*/
+function searchLibrarys(bookNames, userPosition) {
+    //入力された図書名をISBNに変換
+    var ISBNs = bookNamesToISBNs(bookNames);
+    var librarys = searchLibrarysByISBNs(ISBNs, userPosition);
+    return librarys;
+}
+/*
   webAPIを叩く関数
   @param string url 叩きたいwebAPIのurl
   @return jsonオブジェクト
 */
 function callAPI(url) {
-    var request = new XMLHttpRequest();
-    request.open('GET', url, false);
-    request.send();
-    if (request.status === 200) {
-        return JSON.parse(request.responseText);
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, false);
+    xhr.send();
+    if (xhr.status === 200) {
+        return JSON.parse(xhr.responseText);
     }
     else {
         return [];
