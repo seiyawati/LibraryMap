@@ -1,0 +1,58 @@
+/****** 共通設定 ******/
+html, body {
+  width: 100%;
+  color: #555;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/****** ヘッダー ******/
+.custom-nav {
+  background-color: #9ac29f;
+}
+.custom-nav .navbar-brand {
+  font-weight: bold;
+}
+.custom-nav input, .btn {
+  border-radius: 0;
+}
+.custom-nav input {
+  border: none;
+}
+.custom-nav .btn {
+  background-color: #d9de84;
+  color: #555;
+}
+
+/****** メイン ******/
+.left-contents {
+  overflow-y: scroll;
+  height: 450px;
+}
+/* 図書館情報 */
+.library-info {
+  border: 1px solid #777;
+  font-size: 0.85rem;
+}
+.library-info:hover {
+  background-color: #FCF4C2;
+}
+.library-name {
+  color: #555;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.library-info:hover .library-name {
+  color: #E4BD60;
+}
+
+/* 地図 */
+#map { /* <body>内に記載しているID名 */
+  width: 100%; /* 幅 */
+  height: 450px; /* 高さ */
+  background-color: black; /* 背景色 */
+}

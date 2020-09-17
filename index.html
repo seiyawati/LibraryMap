@@ -4,34 +4,101 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>   /* スタイルを定義するブロック(<body>内に直接スタイルを記述する場合は不要) */
-
-    #map { /* <body>内に記載しているID名 */
-        width: 800px; /* 幅 */
-        height: 450px; /* 高さ */
-        background-color: black; /* 背景色 */
-    }
-    </style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>図書館マップ</title>
 </head>
 
 <!-- 画面に表示する要素を定義するブロック -->
 <body>
-    <h1>Library Map</h1>
-    <input type="text" name="book_names" id="book_names">
-    <button type="button" name="search_books" id="search_books">検索</button>
-    <!-- 地図を表示するための枠組み -->
-    <div id="map"></div>
-    <input type="button" value="ピン(表示/非表示)" onclick="switchPin()"/>
+  <header class="mb-3">
+    <nav class="navbar custom-nav">
+      <a class="navbar-brand">図書館マップ</a>
+      <div class="form-inline">
+        <input id="book_names" class="form-control" type="text" name="book_names" placeholder="本のタイトルを入力してください" aria-label="Search">
+        <button id="search_books" class="btn" type="button" name="search_books"><i class="fas fa-search"></i></button>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 p-0 d-none d-lg-block left-contents">
+          <!-- とりあえず埋めてます、JSで追加するところ -->
+          <div class="p-2 library-info">
+            <a href="" class="library-name">図書館名</a>
+            <p class="">図書館の住所図書館の住所図書館の住所</p>
+            <div class="row no-gutters">
+              <div class="col-12 col-md-6 text-center pr-2"><img src="images/dum.png" class="w-100"></div>
+              <div class="col-12 col-md-6 p-0">
+                <ul>
+                  <li><i class="far fa-clock mr-2"></i><span class="">10:00-19:00</span></li>
+                  <li><i class="far fa-calendar-times mr-2"></i><span class="">年末年始</span></li>
+                </ul>
+                <button class="btn root-btn"></button>
+              </div>
+            </div>        
+          </div>
+          <div class="p-2 library-info">
+            <a href="" class="library-name">図書館名</a>
+            <p class="">図書館の住所図書館の住所図書館の住所</p>
+            <div class="row no-gutters">
+              <div class="col-12 col-md-6 text-center pr-2"><img src="images/dum.png" class="w-100"></div>
+              <div class="col-12 col-md-6 p-0">
+                <ul>
+                  <li><i class="far fa-clock mr-2"></i><span class="">10:00-19:00</span></li>
+                  <li><i class="far fa-calendar-times mr-2"></i><span class="">年末年始</span></li>
+                </ul>
+                <button class="btn root-btn"></button>
+              </div>
+            </div>        
+          </div>
+          <div class="p-2 library-info">
+            <a href="" class="library-name">図書館名</a>
+            <p class="">図書館の住所図書館の住所図書館の住所</p>
+            <div class="row no-gutters">
+              <div class="col-12 col-md-6 text-center pr-2"><img src="images/dum.png" class="w-100"></div>
+              <div class="col-12 col-md-6 p-0">
+                <ul>
+                  <li><i class="far fa-clock mr-2"></i><span class="">10:00-19:00</span></li>
+                  <li><i class="far fa-calendar-times mr-2"></i><span class="">年末年始</span></li>
+                </ul>
+                <button class="btn root-btn"></button>
+              </div>
+            </div>        
+          </div>
+          <div class="p-2 library-info">
+            <a href="" class="library-name">図書館名</a>
+            <p class="">図書館の住所図書館の住所図書館の住所</p>
+            <div class="row no-gutters">
+              <div class="col-12 col-md-6 text-center pr-2"><img src="images/dum.png" class="w-100"></div>
+              <div class="col-12 col-md-6 p-0">
+                <ul>
+                  <li><i class="far fa-clock mr-2"></i><span class="">10:00-19:00</span></li>
+                  <li><i class="far fa-calendar-times mr-2"></i><span class="">年末年始</span></li>
+                </ul>
+                <button class="btn root-btn"></button>
+              </div>
+            </div>        
+          </div>
+        </div>
+        <div class="col-md-9 right-contents">
+          <div id="map"></div>
+          <input type="button" value="ピン(表示/非表示)" onclick="switchPin()"/>
+        </div>
+      </div>
+    </div>
+  </main>
 
-    <script src="https://api-service.instruction.cld.dev.navitime.co.jp/teamc/v1/map_script?host=localhost"></script>   <!-- 地図を表示  -->
+  <script src="https://api-service.instruction.cld.dev.navitime.co.jp/teamc/v1/map_script?host=localhost"></script>   <!-- 地図を表示  -->
 
-    <!-- スクリプトを定義するブロック -->
-    <script src="./js/map.js"></script>
+  <!-- スクリプトを定義するブロック -->
+  <script src="./js/map.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./js/caril.js"></script>
-    <script src="./js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="./js/caril.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 </html>
