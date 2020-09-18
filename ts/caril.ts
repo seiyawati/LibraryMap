@@ -44,10 +44,10 @@ function getSystemIDs(userPosition: Array<string>) {
 /*
   ISBNの配列を受け取り，その蔵書が有る図書館の情報を返す関数
   @param Array<string> ISBNs 検索したい本のISBNの配列
+  @param Array<string> userPosition 緯度/経度
   @return dict librarys 蔵書のある図書館の情報の連想配列
 */
-function searchLibrarysByISBNs(ISBNs: Array<string>): Array<string> {
-  const userPosition = ['35.667339', '139.7148'];
+function searchLibrarysByISBNs(ISBNs: Array<string>, userPosition: Array<string>): Array<string> {
   const libraryInfomations = getSystemIDs(userPosition);
   const systemIDs = [];
   for (let systemid in libraryInfomations) {
@@ -69,16 +69,28 @@ function searchLibrarysByISBNs(ISBNs: Array<string>): Array<string> {
   return librarys;
 }
 /*
+  bookNamesに対し，蔵書のある図書館を返す関数
+  @param Array<string> bookNames 図書名の配列
+  @param Array<string> userPosition ユーザの現在位置(緯度/経度)
+  @return dict librarys 蔵書の有る図書館の情報
+*/
+function searchLibrarys(bookNames: Array<string>, userPosition: Array<string>) {
+  //入力された図書名をISBNに変換
+  const ISBNs: Array<string> = bookNamesToISBNs(bookNames);
+  const librarys = searchLibrarysByISBNs(ISBNs, userPosition);
+  return librarys;
+}
+/*
   webAPIを叩く関数
   @param string url 叩きたいwebAPIのurl
   @return jsonオブジェクト
 */
 function callAPI(url: string) {
-  const request = new XMLHttpRequest();
-  request.open('GET', url, false);
-  request.send();
-  if (request.status === 200) {
-    return JSON.parse(request.responseText);
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', url, false);
+  xhr.send();
+  if (xhr.status === 200) {
+    return JSON.parse(xhr.responseText);
   } else {
     return [];
   }
