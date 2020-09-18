@@ -8,6 +8,9 @@ ul {
   padding: 0;
   margin: 0;
 }
+.bold {
+  font-weight: bold;
+}
 
 /****** ヘッダー ******/
 .custom-nav {
@@ -32,9 +35,9 @@ ul {
 /****** メイン ******/
 .left-contents {
   overflow-y: scroll;
-  height: calc(100vh - 56px - 16px);;
+  height: calc(100vh - 56px - 16px);
 }
-/* 図書館情報 */
+/* 図書館情報（一覧） */
 .library-info {
   border: 1px solid #777;
   font-size: 0.85rem;
@@ -51,6 +54,33 @@ ul {
 .library-info:hover .library-name {
   color: #E4BD60;
 }
+.root-btn {
+  width: 100%;
+  font-size: 0.75rem;
+  background-color: #EFF1CD;
+  border: 1px solid #777;
+  border-radius: 5px;
+}
+
+/* 図書館情報（詳細） */
+.library-details h2{
+  font-size: 1.3rem;
+  background-color: #d9de84;
+}
+.library-details h3{
+  font-size: 1rem;
+}
+.cafe-btn {
+  width: 100%;
+  font-size: 0.75rem;
+  background-color: #FCF4C2;
+  border: 1px solid #777;
+  border-radius: 5px;
+}
+.img-box {
+  width: 100%;
+  height: 200px;
+}
 
 /* 地図 */
 #map { /* <body>内に記載しているID名 */
@@ -59,8 +89,40 @@ ul {
   background-color: black; /* 背景色 */
 }
 @media screen and (max-width: 479px) {
-  /* 480pxまでの幅の場合に適応される */
   #map {
     height: calc(100vh - 94px - 16px);
   }
+}
+
+/* ボタン */
+.btn-group {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+.mobile-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #aaa;
+  color: #555;
+  background-color: #ddd;
+}
+.mobile-btn:hover {
+  background-color: #d9de84;
+  border: 2px solid #d9de84;
+}
+
+/* スクロールバー */
+.left-contents::-webkit-scrollbar{
+  width: 10px;
+}
+.left-contents::-webkit-scrollbar-track{
+  background: #fff;
+  border-left: solid 1px #ececec;
+}
+.left-contents::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 2px #fff;
 }
