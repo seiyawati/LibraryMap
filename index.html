@@ -8,13 +8,11 @@
     <link rel="stylesheet" href="css/index.css">
     <title>図書館マップ</title>
 </head>
-
-<!-- 画面に表示する要素を定義するブロック -->
 <body>
   <header class="mb-3">
     <nav class="navbar custom-nav">
       <a class="navbar-brand">図書館マップ</a>
-      <div class="form-inline">
+      <div class="d-flex">
         <input id="book_names" class="form-control" type="text" name="book_names" placeholder="本のタイトルを入力してください" aria-label="Search">
         <button id="search_books" class="btn" type="button" name="search_books"><i class="fas fa-search"></i></button>
       </div>
@@ -82,9 +80,8 @@
             </div>        
           </div>
         </div>
-        <div class="col-md-9 right-contents">
+        <div class="col-lg-9 right-contents">
           <div id="map"></div>
-          <input type="button" value="ピン(表示/非表示)" onclick="switchPin()"/>
         </div>
       </div>
     </div>
