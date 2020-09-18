@@ -1,18 +1,15 @@
 let libraryInfomationView = `
 <div class="p-2 library-info">
-<a href="{url}" class="library-name">{library_name}</a>
+<a href="{url}" class="library-name" target="_blank">{library_name}</a>
 <p class="">図書館の住所図書館の住所図書館の住所</p>
 <div class="row no-gutters">
 <div class="col-12 col-md-6 text-center pr-2"><img src="{image_url}" class="w-100"></div>
 <div class="col-12 col-md-6 p-0">
-<ul>
 <ul class="mb-2">
 <li><i class="far fa-clock mr-2"></i><span class="">10:00-19:00</span></li>
 <li><i class="far fa-calendar-times mr-2"></i><span class="">年末年始</span></li>
 </ul>
-<button class="btn root-btn"></button>
 <button class="p-2 root-btn"><i class="fas fa-route mr-2"></i>ルートを調べる</button>
-</div>
 </div>
 </div>
 `;
