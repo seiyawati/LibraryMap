@@ -1,25 +1,5 @@
-//テストデータ
-const libraries = [
-    {
-      address: "栃木県宇都宮市明保野町7-57",
-      libraryName: "宇都宮市立中央図書館",
-      tel: "028-636-0231",
-      url: "http://www.lib-utsunomiya.jp/"
-    },
-    {
-      address: "栃木県宇都宮市雀宮町56-1",
-      libraryName: "宇都宮市立南図書館",
-      tel: "028-653-7609",
-      url: "http://www.lib-utsunomiya.jp/"
-    },
-    {
-      address: "茨城県つくば市吾妻3-1",
-      libraryName: "筑波学院大学附属図書館",
-      tel: "029-858-4820",
-      url: "http://www.tsukuba-g.ac.jp/library/library_top.html"
-    }
-];
-  
+var libraryNames = [];
+
 /**
  * 地図に検索対象の図書館のピンを立てる
  */
@@ -49,11 +29,11 @@ function displayPin(position) {
     position:current,
     content:'現在位置'
   });
-  infoWindow.setVisible(false);
+  // infoWindow.setVisible(false);
   var baseUrl = 'https://api-service.instruction.cld.dev.navitime.co.jp/teamc/v1';
-  libraries.forEach(library => {
+  libraryNames.forEach(libraryName => {
       axios
-          .get(baseUrl + `/spot?word=${library.libraryName}`)
+          .get(baseUrl + `/spot?word=${libraryName}`)
           .then(connectSuccess)
           .catch(connectFailure);
   });
