@@ -20,6 +20,8 @@ ul {
   border-radius: 0;
 }
 .custom-nav input {
+  display: block;
+  width: 270px;
   border: none;
 }
 .custom-nav .btn {
@@ -30,7 +32,7 @@ ul {
 /****** メイン ******/
 .left-contents {
   overflow-y: scroll;
-  height: 450px;
+  height: calc(100vh - 56px - 16px);;
 }
 /* 図書館情報 */
 .library-info {
@@ -53,6 +55,12 @@ ul {
 /* 地図 */
 #map { /* <body>内に記載しているID名 */
   width: 100%; /* 幅 */
-  height: 450px; /* 高さ */
+  height: calc(100vh - 56px - 16px); /* 高さ */
   background-color: black; /* 背景色 */
+}
+@media screen and (max-width: 479px) {
+  /* 480pxまでの幅の場合に適応される */
+  #map {
+    height: calc(100vh - 94px - 16px);
+  }
 }
