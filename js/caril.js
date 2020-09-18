@@ -57,17 +57,18 @@ function searchLibrarysByISBNs(ISBNs, userPosition) {
     for (var systemid in libraryInfomations) {
         systemIDs.push(systemid);
     }
-    var librarys = [];
+    var librarys = {};
     var carilURL = 'http://api.calil.jp/check?isbn={isbn}&systemid={systemIDs}&format=json&callback=no';
     for (var _i = 0, ISBNs_1 = ISBNs; _i < ISBNs_1.length; _i++) {
         var ISBN = ISBNs_1[_i];
+        librarys[ISBN] = {};
+        librarys[ISBN]['librarys'] = [];
         var requestURL = carilURL.replace('{isbn}', ISBN).replace('{systemIDs}', systemIDs.join());
-        console.log(systemIDs.join());
         var response = callAPI(requestURL);
         for (var systemid in response.books[ISBN]) {
             for (var libkey in response.books[ISBN][systemid].libkey) {
                 if (response.books[ISBN][systemid].libkey[libkey] === '貸出可' && libraryInfomations[systemid][libkey]) {
-                    librarys.push(libraryInfomations[systemid][libkey]);
+                    librarys[ISBN]['librarys'].push(libraryInfomations[systemid][libkey]);
                 }
             }
         }
@@ -84,6 +85,9 @@ function searchLibrarys(bookNames, userPosition) {
     //入力された図書名をISBNに変換
     var ISBNs = bookNamesToISBNs(bookNames);
     var librarys = searchLibrarysByISBNs(ISBNs, userPosition);
+    for (var i in ISBNs) {
+        librarys[ISBNs[i]]['book_name'] = bookNames[i];
+    }
     return librarys;
 }
 /*

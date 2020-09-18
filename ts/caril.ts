@@ -47,21 +47,23 @@ function getSystemIDs(userPosition: Array<string>) {
   @param Array<string> userPosition 緯度/経度
   @return dict librarys 蔵書のある図書館の情報の連想配列
 */
-function searchLibrarysByISBNs(ISBNs: Array<string>, userPosition: Array<string>): Array<string> {
+function searchLibrarysByISBNs(ISBNs: Array<string>, userPosition: Array<string>) {
   const libraryInfomations = getSystemIDs(userPosition);
   const systemIDs = [];
   for (let systemid in libraryInfomations) {
     systemIDs.push(systemid);
   }
-  const librarys: Array<string> = [];
+  const librarys = {};
   const carilURL: string = 'http://api.calil.jp/check?isbn={isbn}&systemid={systemIDs}&format=json&callback=no';
   for(let ISBN of ISBNs) {
+    librarys[ISBN] = {};
+    librarys[ISBN]['librarys'] = [];
     const requestURL: string = carilURL.replace('{isbn}', ISBN).replace('{systemIDs}', systemIDs.join());
     let response = callAPI(requestURL);
     for (let systemid in response.books[ISBN]) {
       for (let libkey in response.books[ISBN][systemid].libkey) {
         if(response.books[ISBN][systemid].libkey[libkey] === '貸出可' && libraryInfomations[systemid][libkey]) {
-          librarys.push(libraryInfomations[systemid][libkey]);
+          librarys[ISBN]['librarys'].push(libraryInfomations[systemid][libkey]);
         }
       }
     }
@@ -78,6 +80,9 @@ function searchLibrarys(bookNames: Array<string>, userPosition: Array<string>) {
   //入力された図書名をISBNに変換
   const ISBNs: Array<string> = bookNamesToISBNs(bookNames);
   const librarys = searchLibrarysByISBNs(ISBNs, userPosition);
+  for(let i in ISBNs) {
+    librarys[ISBNs[i]]['book_name'] = bookNames[i];
+  }
   return librarys;
 }
 /*
