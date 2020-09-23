@@ -35,3 +35,7 @@ function getImage(query: string): string {
   const imageURL: string = response.items[0].link;
   return imageURL;
 }
+
+function hhmm(str) {
+  return str.substr(0, 2) + ':' + str.substr(2, 2);
+}
