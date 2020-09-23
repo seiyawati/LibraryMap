@@ -1,5 +1,8 @@
 $(function () {
+    $("#loading").hide();
     $('#search_books').click(function () {
+        //ローディング画面ON
+        $("#loading").show();
         //要素を空にする
         $(".library-infos").empty();
         //検索フォームから入力を取得
@@ -17,8 +20,11 @@ $(function () {
                 $('.library-infos').append(formatLibraryInfo(librarys[isbn]['librarys'][i]));
             }
         }
+        //ローディング画面OFF
+        $("#loading").hide();
         //マップにピンを立てる
         pinMap();
+        
     });
     //ルート検索のボタンがクリックされた時
     $(document).on('click', '.root-btn', function () {
