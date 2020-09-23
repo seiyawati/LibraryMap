@@ -4,17 +4,9 @@ var pinData = [];//[{name: "ナビタイム ", lat: 35.689614, lng: 139.691634}]
 var libraryNames = [];
 
 /**
- * 地図に検索対象の図書館のピンを立てる
- */
-function pinMap() {
-  getLibraryInfo();
-  displayPin();
-}
-
-/**
  * 現在位置と図書館のピンを表示する
  */
-function getLibraryInfo() {
+function pinMap() {
   var baseUrl = 'https://api-service.instruction.cld.dev.navitime.co.jp/teamc/v1';
   libraryNames.forEach(libraryName => {
       axios
@@ -22,6 +14,7 @@ function getLibraryInfo() {
           .then(connectPinSuccess)
           .catch(connectPinFailure);
   });
+  console.log(pinData);
 }
 
 /**
@@ -31,8 +24,9 @@ function connectPinSuccess(response) {
   var spot = response.data.items[0];
   var spot_lat = spot.coord.lat;
   var spot_lng = spot.coord.lon;
-  var spot_name = spot.name;
+  var spot_name = spot.name.replace(/\s+/g, "");
   pinData.push({name: spot_name, lat: spot_lat, lng: spot_lng});
+  displayPin();
 }
 
 /**
