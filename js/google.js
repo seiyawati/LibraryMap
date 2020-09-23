@@ -35,3 +35,6 @@ function getImage(query) {
     var imageURL = response.items[0].link;
     return imageURL;
 }
+function hhmm(str) {
+    return str.substr(0, 2) + ':' + str.substr(2, 2);
+}
