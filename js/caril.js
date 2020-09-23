@@ -1,19 +1,23 @@
 /*
   本の名前の配列を受け取り，それに対応するISBNの配列を返す関数
   @param Array<string> bookNames 検索したい本の配列
-  @return Array<string> ISBNs 引数に対するISBNの配列
+  @return dict bookInfomaitons 引数に対する本の情報の配列
 */
 function bookNamesToISBNs(bookNames) {
-    var ISBNs = [];
+    var bookInfomaitons = [];
     var googleBookAPI = "https://www.googleapis.com/books/v1/volumes?q={bookName}";
     for (var _i = 0, bookNames_1 = bookNames; _i < bookNames_1.length; _i++) {
         var bookName = bookNames_1[_i];
         var requestURL = googleBookAPI.replace('{bookName}', bookName);
         var response = callAPI(requestURL);
-        var ISBN = response.items[0].volumeInfo.industryIdentifiers[0].identifier;
-        ISBNs.push(ISBN);
+        var i = 0;
+        while (response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 10 || response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 13)
+            ++i;
+        var ISBN = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
+        var imageURL = response.items[i].volumeInfo.imageLinks.thumbnail;
+        bookInfomaitons.push({ 'isbn': ISBN, 'image_url': imageURL });
     }
-    return ISBNs;
+    return bookInfomaitons;
 }
 /*
   指定された地点付近の図書館のリストを返す関数
@@ -51,7 +55,7 @@ function getSystemIDs(userPosition) {
   @param Array<string> userPosition 緯度/経度
   @return dict librarys 蔵書のある図書館の情報の連想配列
 */
-function searchLibrarysByISBNs(ISBNs, userPosition) {
+function searchLibrarysByISBNs(bookInfomaitons, userPosition) {
     var libraryInfomations = getSystemIDs(userPosition);
     var systemIDs = [];
     for (var systemid in libraryInfomations) {
@@ -59,12 +63,17 @@ function searchLibrarysByISBNs(ISBNs, userPosition) {
     }
     var librarys = {};
     var carilURL = 'http://api.calil.jp/check?isbn={isbn}&systemid={systemIDs}&format=json&callback=no';
-    for (var _i = 0, ISBNs_1 = ISBNs; _i < ISBNs_1.length; _i++) {
-        var ISBN = ISBNs_1[_i];
+    for (var _i = 0, bookInfomaitons_1 = bookInfomaitons; _i < bookInfomaitons_1.length; _i++) {
+        var bookInfomaiton = bookInfomaitons_1[_i];
+        var ISBN = bookInfomaiton.isbn;
         librarys[ISBN] = {};
         librarys[ISBN]['librarys'] = [];
         var requestURL = carilURL.replace('{isbn}', ISBN).replace('{systemIDs}', systemIDs.join());
         var response = callAPI(requestURL);
+        while (response['continue'] === '1') {
+            var tmp = callAPI('http://ec2-54-178-103-118.ap-northeast-1.compute.amazonaws.com/sleep2sec');
+            response = callAPI(requestURL);
+        }
         for (var systemid in response.books[ISBN]) {
             for (var libkey in response.books[ISBN][systemid].libkey) {
                 if (response.books[ISBN][systemid].libkey[libkey] === '貸出可' && libraryInfomations[systemid][libkey]) {
@@ -83,10 +92,11 @@ function searchLibrarysByISBNs(ISBNs, userPosition) {
 */
 function searchLibrarys(bookNames, userPosition) {
     //入力された図書名をISBNに変換
-    var ISBNs = bookNamesToISBNs(bookNames);
-    var librarys = searchLibrarysByISBNs(ISBNs, userPosition);
-    for (var i in ISBNs) {
-        librarys[ISBNs[i]]['book_name'] = bookNames[i];
+    var bookInfomaitons = bookNamesToISBNs(bookNames);
+    var librarys = searchLibrarysByISBNs(bookInfomaitons, userPosition);
+    for (var i in bookInfomaitons) {
+        librarys[bookInfomaitons[i]['isbn']]['book_name'] = bookNames[i];
+        librarys[bookInfomaitons[i]['isbn']]['book_image_url'] = bookInfomaitons[i]['image_url'];
     }
     return librarys;
 }
