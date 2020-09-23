@@ -1,19 +1,3 @@
-let libraryInfomationView = `
-<div class="p-2 library-info">
-<a href="{url}" class="library-name" target="_blank">{library_name}</a>
-<p class="">{address}</p>
-<div class="row no-gutters">
-<div class="col-12 col-md-6 text-center pr-2"><img src="{image_url}" class="w-100"></div>
-<div class="col-12 col-md-6 p-0">
-<ul class="mb-2">
-<li><i class="far fa-clock mr-2"></i><span class="">{open}-{close}</span></li>
-<li><i class="far fa-calendar-times mr-2"></i><span class="">年末年始</span></li>
-</ul>
-<button class="p-2 root-btn"><i class="fas fa-route mr-2"></i>ルートを調べる</button>
-</div>
-</div>
-`;
-
 $(function () {
   $('#search_books').click(function () {
     //要素を空にする
@@ -30,12 +14,7 @@ $(function () {
             librarys[isbn]['librarys'][i]['opening_hours'] = getOpeningHours(libraryName);
             //図書館の外観画像を取得
             librarys[isbn]['librarys'][i]['image_url'] = getImage(libraryName + '+' + '外観');
-            $('.library-infos').append(libraryInfomationView.replace('{url}', librarys[isbn]['librarys'][i]['url'])
-                        .replace('{library_name}', librarys[isbn]['librarys'][i]['libraryName'])
-                        .replace('{image_url}', librarys[isbn]['librarys'][i]['image_url'])
-                        .replace('{address}', librarys[isbn]['librarys'][i]['address'])
-                        .replace('{open}', hhmm(librarys[isbn]['librarys'][i]['opening_hours']['periods'][0]['open']['time']))
-                        .replace('{close}', hhmm(librarys[isbn]['librarys'][i]['opening_hours']['periods'][0]['close']['time'])));
+            $('.library-infos').append(formatLibraryInfo(librarys[isbn]['librarys'][i]));
         }
     }
     //マップにピンを立てる
