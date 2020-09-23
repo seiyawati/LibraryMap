@@ -11,7 +11,7 @@ function bookNamesToISBNs(bookNames) {
         var requestURL = googleBookAPI.replace('{bookName}', bookName);
         var response = callAPI(requestURL);
         var i = 0;
-        while (response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 10 && response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 13)
+        while (isNaN(response.items[i].volumeInfo.industryIdentifiers[0].identifier))
             ++i;
         var ISBN = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
         var imageURL = response.items[i].volumeInfo.imageLinks.thumbnail;
@@ -70,7 +70,7 @@ function searchLibrarysByISBNs(bookInfomaitons, userPosition) {
         librarys[ISBN]['librarys'] = [];
         var requestURL = carilURL.replace('{isbn}', ISBN).replace('{systemIDs}', systemIDs.join());
         var response = callAPI(requestURL);
-        while (response['continue'] === '1') {
+        while (response['continue'] === 1) {
             var tmp = callAPI('http://ec2-54-178-103-118.ap-northeast-1.compute.amazonaws.com/sleep2sec');
             response = callAPI(requestURL);
         }

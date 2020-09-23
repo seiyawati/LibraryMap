@@ -10,7 +10,7 @@ function bookNamesToISBNs(bookNames: Array<string>) {
     const requestURL: string = googleBookAPI.replace('{bookName}', bookName);
     const response = callAPI(requestURL);
     const i: number = 0;
-    while(response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 10 && response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 13) ++i;
+    while (isNaN(response.items[i].volumeInfo.industryIdentifiers[0].identifier)) ++i;
     const ISBN = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
     const imageURL = response.items[i].volumeInfo.imageLinks.thumbnail;
     bookInfomaitons.push({'isbn': ISBN, 'image_url': imageURL});
@@ -64,7 +64,7 @@ function searchLibrarysByISBNs(bookInfomaitons, userPosition: Array<string>) {
     librarys[ISBN]['librarys'] = [];
     const requestURL: string = carilURL.replace('{isbn}', ISBN).replace('{systemIDs}', systemIDs.join());
     let response = callAPI(requestURL);
-    while(response['continue'] === '1') {
+    while(response['continue'] === 1) {
       let tmp = callAPI('http://ec2-54-178-103-118.ap-northeast-1.compute.amazonaws.com/sleep2sec');
       response = callAPI(requestURL);
     }
