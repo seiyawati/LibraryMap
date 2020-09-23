@@ -10,7 +10,7 @@ function bookNamesToISBNs(bookNames: Array<string>) {
     const requestURL: string = googleBookAPI.replace('{bookName}', bookName);
     const response = callAPI(requestURL);
     const i: number = 0;
-    while(response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 10 || response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 13) ++i;
+    while(response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 10 && response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 13) ++i;
     const ISBN = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
     const imageURL = response.items[i].volumeInfo.imageLinks.thumbnail;
     bookInfomaitons.push({'isbn': ISBN, 'image_url': imageURL});
