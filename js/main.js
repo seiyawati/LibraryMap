@@ -18,9 +18,16 @@ $(function () {
                     .replace('{image_url}', librarys[isbn]['librarys'][i]['image_url']));
             }
         }
-        //マップに図書館のピンを立てる
-        libraryMap();
+        //マップにピンを立てる
+        pinMap();
     });
+
+    //ルート検索のボタンがクリックされた時
+    $(document).on('click', '.root-btn', function() {
+        var library = $(this).parents('.library-info').find('.library-name').text()
+        searchRoute(library);
+    })
+    
     //初期表示でマップに現在位置を表示
     window.onload = initMap();
 });
