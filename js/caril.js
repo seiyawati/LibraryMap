@@ -11,7 +11,7 @@ function bookNamesToISBNs(bookNames) {
         var requestURL = googleBookAPI.replace('{bookName}', bookName);
         var response = callAPI(requestURL);
         var i = 0;
-        while (response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 10 || response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 13)
+        while (response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 10 && response.items[i].volumeInfo.industryIdentifiers[0].identifier.length !== 13)
             ++i;
         var ISBN = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
         var imageURL = response.items[i].volumeInfo.imageLinks.thumbnail;
