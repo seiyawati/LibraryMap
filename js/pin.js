@@ -1,20 +1,24 @@
 var pin = [];
 var infoWindow = [];
 var pinData = [];//[{name: "ナビタイム ", lat: 35.689614, lng: 139.691634}]
+var libraryData = [];
 var libraryNames = [];
+var libraryAddresses = [];
 
 /**
  * 現在位置と図書館のピンを表示する
  */
 function pinMap() {
   var baseUrl = 'https://api-service.instruction.cld.dev.navitime.co.jp/teamc/v1';
-  libraryNames.forEach(libraryName => {
+  libraryAddresses.forEach(libraryAddress => {
       axios
-          .get(baseUrl + `/spot?word=${libraryName}`)
+          .get(baseUrl + `/spot?word=${libraryAddress}`)
           .then(connectPinSuccess)
           .catch(connectPinFailure);
   });
   console.log(pinData);
+  console.log(libraryNames);
+  console.log(libraryData);
 }
 
 /**
