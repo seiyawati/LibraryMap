@@ -16,7 +16,8 @@ function bookNamesToISBNs(bookNames: Array<string>) {
     const author: string = response.items[i].volumeInfo.authors;
     const publisher: string = response.items[i].volumeInfo.publisher;
     const bookNameByGoogle: string = response.items[i].volumeInfo.title;
-    bookInfomaitons.push({'book_name': bookNameByGoogle,'isbn': ISBN, 'image_url': imageURL, 'author': author,'publisher': publisher});
+    const description: string = response.items[i].volumeInfo.description;
+    bookInfomaitons.push({'book_name': bookNameByGoogle,'isbn': ISBN, 'image_url': imageURL, 'author': author,'publisher': publisher, 'description': description});
   }
   return bookInfomaitons;
 }
@@ -69,10 +70,10 @@ function searchLibrarysByISBNs(bookInfomaitons, userPosition: Array<string>) {
     let response = callAPI(requestURL);
     let cnt = 0;
     while(response['continue'] === 1) {
+      response = callAPI(requestURL);
       if(cnt == 1) break;
       ++cnt;
       let tmp = callAPI('http://ec2-54-178-103-118.ap-northeast-1.compute.amazonaws.com/sleep2sec');
-      response = callAPI(requestURL);
     }
     for (let systemid in response.books[ISBN]) {
       for (let libkey in response.books[ISBN][systemid].libkey) {

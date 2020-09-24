@@ -23,6 +23,7 @@ let bookInfomaitonView = `
 <p id="author" class="mb-2">{author}</p>
 <p id="publisher" class="m-0 text-right">{publisher}</p>
 </div>
+<p>{description}</p>
 </div>
 `;
 const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
@@ -69,8 +70,9 @@ function getClosingDay(openingHours) {
   @return レンダリングした図書情報のdiv要素
 */
 function formatBookInfo(args) {
-  return bookInfomaitonView.replace('{image_url}', args['book_image_url'])
+  return bookInfomaitonView.replace('{image_url}', args['image_url'])
          .replace('{book_name}', args['book_name'])
-         .replace('{author}', args['authors'].join())
-         .replace('{publisher}', args['publisher']);
+         .replace('{author}', args['author'].join())
+         .replace('{publisher}', args['publisher'])
+         .replace('{description}', args['description']);
 }
