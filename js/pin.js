@@ -32,7 +32,7 @@ function connectPinSuccess(response) {
 /**
  * ピンの取得に失敗した時に呼ぶ関数
  */
-function connectPinFailure(error) {
+function connectPinFailure() {
   alert("お探しの本がある図書館を取得できません。");
 }
 

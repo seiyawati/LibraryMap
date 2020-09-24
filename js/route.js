@@ -7,9 +7,9 @@ function searchRoute(library) {
         .catch(connectFailureRouteShape)
 }
 
-
 function connectSuccessRouteShape(response) {
     route = response.data;
+    infoWindow.forEach(info => info.setVisible(true));
     renderer = new navitime.geo.route.Renderer(route, {
         map: map,
         unit: 'degree',
