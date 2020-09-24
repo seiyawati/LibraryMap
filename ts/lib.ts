@@ -8,8 +8,20 @@ let libraryInfomationView = `
 <ul class="mb-2">
 <li><i class="far fa-clock mr-2"></i><span class="">{open}-{close}</span></li>
 <li><i class="far fa-calendar-times mr-2"></i><span class="">{closing_day}</span></li>
+<li><span style="background-color: green; border-radius: 5px; color: white; padding: 2px; margin-top: 2px;margin-bottom:2px;">貸出可</span></li>
 </ul>
 <button class="p-2 root-btn"><i class="fas fa-route mr-2"></i>ルートを調べる</button>
+</div>
+</div>
+`;
+
+let bookInfomaitonView = `
+<div class="col-12 text-center mb-3"><img src="{image_url}" class="img-fit"></div>
+<div class="pt-4 pl-4 pr-4 pb-2 back">
+<div class="book-main-info mb-2">
+<p id="book-title" class="mb-2">{book_name}</p>
+<p id="author" class="mb-2">{author}</p>
+<p id="publisher" class="m-0 text-right">{publisher}</p>
 </div>
 </div>
 `;
@@ -50,4 +62,15 @@ function getClosingDay(openingHours) {
     }
   }
   return ret;
+}
+
+/*
+  @param  レンダリングする図書
+  @return レンダリングした図書情報のdiv要素
+*/
+function formatBookInfo(args) {
+  return bookInfomaitonView.replace('{image_url}', args['book_image_url'])
+         .replace('{book_name}', args['book_name'])
+         .replace('{author}', args['authors'].join())
+         .replace('{publisher}', args['publisher']);
 }
