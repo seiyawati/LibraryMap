@@ -10,13 +10,19 @@ $(function () {
         //近隣の図書館で，蔵書が有る図書館を取得
         var librarys = searchLibrarys(bookNames, getUserPosition());
         for (var isbn in librarys) {
+            var libraryNamesSplitByComma = "";
+            var querySplitByComma = "";
             for (var i in librarys[isbn]['librarys']) {
                 var libraryName = librarys[isbn]['librarys'][i]['libraryName'];
                 libraryNames.push(libraryName);
-                //図書館の開館情報を取得
-                librarys[isbn]['librarys'][i]['opening_hours'] = getOpeningHours(libraryName);
-                //図書館の外観画像を取得
-                librarys[isbn]['librarys'][i]['image_url'] = getImage(libraryName + '+' + '外観');
+                libraryNamesSplitByComma += libraryName + ',';
+                querySplitByComma += libraryName + '+' + '外観' + ',';
+            }
+            var openingHoursArray = getOpeningHours(libraryNamesSplitByComma);
+            var imageURLs = getImage(querySplitByComma);
+            for (var i in librarys[isbn]['librarys']) {
+                librarys[isbn]['librarys'][i]['opening_hours'] = openingHoursArray[i];
+                librarys[isbn]['librarys'][i]['image_url'] = imageURLs[i];
                 $('.library-infos').append(formatLibraryInfo(librarys[isbn]['librarys'][i]));
             }
         }
@@ -24,7 +30,6 @@ $(function () {
         $("#loading").hide();
         //マップにピンを立てる
         pinMap();
-        
     });
     //ルート検索のボタンがクリックされた時
     $(document).on('click', '.root-btn', function () {
