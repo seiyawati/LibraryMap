@@ -13,7 +13,10 @@ function bookNamesToISBNs(bookNames: Array<string>) {
     while (isNaN(response.items[i].volumeInfo.industryIdentifiers[0].identifier)) ++i;
     const ISBN = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
     const imageURL = (typeof response.items[i].volumeInfo.imageLinks === "undefined") ? '' : response.items[i].volumeInfo.imageLinks.thumbnail;
-    bookInfomaitons.push({'isbn': ISBN, 'image_url': imageURL});
+    const author: string = response.items[i].volumeInfo.authors;
+    const publisher: string = response.items[i].volumeInfo.publisher;
+    const bookNameByGoogle: string = response.items[i].volumeInfo.title;
+    bookInfomaitons.push({'book_name': bookNameByGoogle,'isbn': ISBN, 'image_url': imageURL, 'author': author,'publisher': publisher});
   }
   return bookInfomaitons;
 }
@@ -92,8 +95,10 @@ function searchLibrarys(bookNames: Array<string>, userPosition: Array<string>) {
   const bookInfomaitons = bookNamesToISBNs(bookNames);
   const librarys = searchLibrarysByISBNs(bookInfomaitons, userPosition);
   for(let i in bookInfomaitons) {
-    librarys[bookInfomaitons[i]['isbn']]['book_name'] = bookNames[i];
+    librarys[bookInfomaitons[i]['isbn']]['book_name'] = bookInfomaitons[i]['book_name'];
     librarys[bookInfomaitons[i]['isbn']]['book_image_url'] = bookInfomaitons[i]['image_url'];
+    librarys[bookInfomaitons[i]['isbn']]['authors'] = bookInfomaitons[i]['author'];
+    librarys[bookInfomaitons[i]['isbn']]['publisher'] = bookInfomaitons[i]['publisher'];
   }
   return librarys;
 }
