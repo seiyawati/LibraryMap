@@ -3,12 +3,17 @@ $(function () {
     $('#search_books').click(function () {
         //ローディング画面ON
         $("#loading").show();
+        //地図上の情報を空にする
+        refreshMap();
         //要素を空にする
         $(".library-infos").empty();
         $("#book-infos").empty();
+        //検索フォームから入力を取得
+        var bookNames = $('#book_names').val().split(',');
+        $('#book-infos').append(formatBookInfo(bookNamesToISBNs(bookNames)[0]));
+        //ローディング画面ON
+        $("#loading").show();
         setTimeout(function () {
-            //検索フォームから入力を取得
-            var bookNames = $('#book_names').val().split(',');
             //近隣の図書館で，蔵書が有る図書館を取得
             var librarys = searchLibrarys(bookNames, getUserPosition());
             for (var isbn in librarys) {
@@ -29,7 +34,6 @@ $(function () {
                     librarys[isbn]['librarys'][i]['image_url'] = imageURLs[i];
                     $('.library-infos').append(formatLibraryInfo(librarys[isbn]['librarys'][i]));
                 }
-                $('#book-infos').append(formatBookInfo(librarys[isbn]));
             }
             //ローディング画面OFF
             $("#loading").hide();
