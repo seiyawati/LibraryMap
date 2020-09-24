@@ -14,7 +14,7 @@ function bookNamesToISBNs(bookNames) {
         while (isNaN(response.items[i].volumeInfo.industryIdentifiers[0].identifier))
             ++i;
         var ISBN = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
-        var imageURL = response.items[i].volumeInfo.imageLinks.thumbnail;
+        var imageURL = (typeof response.items[i].volumeInfo.imageLinks === "undefined") ? '' : response.items[i].volumeInfo.imageLinks.thumbnail;
         bookInfomaitons.push({ 'isbn': ISBN, 'image_url': imageURL });
     }
     return bookInfomaitons;
@@ -70,7 +70,11 @@ function searchLibrarysByISBNs(bookInfomaitons, userPosition) {
         librarys[ISBN]['librarys'] = [];
         var requestURL = carilURL.replace('{isbn}', ISBN).replace('{systemIDs}', systemIDs.join());
         var response = callAPI(requestURL);
+        var cnt = 0;
         while (response['continue'] === 1) {
+            if (cnt == 1)
+                break;
+            ++cnt;
             var tmp = callAPI('http://ec2-54-178-103-118.ap-northeast-1.compute.amazonaws.com/sleep2sec');
             response = callAPI(requestURL);
         }

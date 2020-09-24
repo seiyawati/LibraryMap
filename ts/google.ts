@@ -8,8 +8,12 @@ function getOpeningHours(placeName: string) {
   const url: string = 'http://ec2-54-178-103-118.ap-northeast-1.compute.amazonaws.com/openinghour?place_id={place_id}';
   const requestURL: string = url.replace('{place_id}', placeId);
   const response = callAPI(requestURL);
-  const openingInfo = response.result.opening_hours;
-  return openingInfo;
+  const openingInfos = [];
+  for(var i in response) {
+    if(response[i].status !== "OK") continue;
+    openingInfos.push(response[i].result.opening_hours);
+  }
+  return openingInfos;
 }
 /*
   地点名に対し，そのplaceIdを返す関数
@@ -20,8 +24,12 @@ function getPlaceId(placeName: string): string {
   const url: string = 'http://ec2-54-178-103-118.ap-northeast-1.compute.amazonaws.com/placeid?placename={placename}';
   const requestURL: string = url.replace('{placename}', placeName);
   const response = callAPI(requestURL);
-  const placeId: string = response.candidates[0].place_id;
-  return placeId;
+  const placeIds = [];
+  for(var i in response) {
+    if(response[i].status !== "OK") continue;
+    placeIds.push(response[i].candidates[0].place_id);
+  }
+  return placeIds;
 }
 /*
   検索クエリに対し，その画像のURLを返す関数
@@ -32,6 +40,10 @@ function getImage(query: string): string {
   const url: string = 'http://ec2-54-178-103-118.ap-northeast-1.compute.amazonaws.com/getimage?query={query}';
   const requestURL: string = url.replace('{query}', query);
   const response = callAPI(requestURL);
-  const imageURL: string = response.items[0].link;
-  return imageURL;
+  const imageURLs = [];
+  for(var i in response) {
+    if (response.length - 1 == i) continue;
+    imageURLs.push(response[i].items[0].link);
+  }
+  return imageURLs;
 }
