@@ -5,6 +5,7 @@ $(function () {
     $("#loading").show();
     //要素を空にする
     $(".library-infos").empty();
+    $("#book-infos").empty();
     setTimeout(function(){
       //検索フォームから入力を取得
       var bookNames = $('#book_names').val().split(',');
