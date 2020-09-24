@@ -19,18 +19,20 @@
     </nav>
   </header>
   <main>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 p-0 d-none d-lg-block left-contents">
-          <div class="col-12 caption">本の情報</div>
+    <div class="container-fluid">
+      <div class="row px-3">
+        <div class="col-lg-2 p-1 d-none d-lg-block left-contents">
+          <div class="col-12 caption">検索した本の情報</div>
           <div id="book-infos" class="pt-3 mb-3 text-center">
           </div>
-          <div class="col-12 caption">本がある図書館</div>
+        </div>
+        <div class="col-lg-2 p-1 d-none d-lg-block middle-contents">
+          <div class="col-12 caption">この本がある図書館</div>
           <div class="scroll">
             <div class="library-infos"></div>
           </div>
         </div>
-        <div class="col-lg-9 right-contents">
+        <div class="col-lg-8 right-contents">
           <div id="map"></div>
           <div class="d-lg-none btn-group d-flex flex-column">
             <button id="nowposition-btn" class="mb-2 mobile-btn"><i class="fas fa-location-arrow"></i></button>
@@ -38,6 +40,7 @@
           </div>
         </div>
       </div>
+      <button id="cafe-btn"><i class="fas fa-coffee"></i></button>
       <div id="loading" class="row">
         <div class="col-12 text-center d-flex align-items-center justify-content-center">
           <div class="loading-caption">読み込み中...</div>
