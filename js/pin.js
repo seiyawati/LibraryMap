@@ -37,8 +37,7 @@ function pinMap() {
   libraryAddresses.forEach(libraryAddress => {
       axios
           .get(baseUrl + `/spot?word=${libraryAddress}`)
-          .then(connectPinSuccess)
-          .catch(connectPinFailure);
+          .then(connectPinSuccess);
   });
 }
 
@@ -52,13 +51,6 @@ function connectPinSuccess(response) {
   var spot_name = spot.name.replace(/\s+/g, "");
   pinData.push({name: spot_name, lat: spot_lat, lng: spot_lng});
   displayPin();
-}
-
-/**
- * ピンの取得に失敗した時に呼ぶ関数
- */
-function connectPinFailure(error) {
-  console.log(error);
 }
 
 /**

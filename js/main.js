@@ -10,7 +10,6 @@ $(function () {
         $("#book-infos").empty();
         //検索フォームから入力を取得
         var bookNames = $('#book_names').val().split(',');
-        console.log(bookNamesToISBNs(bookNames)[0]);
         $('#book-infos').append(formatBookInfo(bookNamesToISBNs(bookNames)[0]));
         //ローディング画面ON
         $("#loading").show();
