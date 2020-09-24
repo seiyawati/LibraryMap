@@ -5,6 +5,31 @@ var libraryNames = [];
 var libraryAddresses = [];
 
 /**
+ * 検索ボタンがクリックされた時に初期化
+ */
+function refreshMap() {
+  pinData = [];
+  libraryAddresses = [];
+  pin = [];
+  infoWindow = [];
+  var current = new navitime.geo.LatLng(userPosition[0], userPosition[1]);
+  document.getElementById('map').innerHTML = '';
+  map = new navitime.geo.Map('map', current, 12);
+  current_pin = new navitime.geo.overlay.Pin({
+  icon:'./images/pin.png',
+  position:current,
+  draggable:false,
+  map:map,
+  title:'現在位置'
+  });
+  current_infoWindow = new navitime.geo.overlay.InfoWindow({
+    map:map,
+    position:current,
+    content:'現在位置'
+  });
+}
+
+/**
  * 現在位置と図書館のピンを表示する
  */
 function pinMap() {
@@ -32,8 +57,8 @@ function connectPinSuccess(response) {
 /**
  * ピンの取得に失敗した時に呼ぶ関数
  */
-function connectPinFailure() {
-  alert("お探しの本がある図書館を取得できません。");
+function connectPinFailure(error) {
+  console.log(error);
 }
 
 /**
