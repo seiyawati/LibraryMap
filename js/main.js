@@ -28,6 +28,7 @@ $(function () {
                     librarys[isbn]['librarys'][i]['image_url'] = imageURLs[i];
                     $('.library-infos').append(formatLibraryInfo(librarys[isbn]['librarys'][i]));
                 }
+                $('#book-infos').append(formatBookInfo(librarys[isbn]));
             }
             //ローディング画面OFF
             $("#loading").hide();
@@ -37,7 +38,7 @@ $(function () {
     });
     //ルート検索のボタンがクリックされた時
     $(document).on('click', '.root-btn', function () {
-        var address= $(this).parents('.library-info').find('p').text();
+        var address = $(this).parents('.library-info').find('p').text();
         drawRoute(address);
     });
     //初期表示でマップに現在位置を表示

@@ -15,7 +15,9 @@ $(function () {
         let querySplitByComma = "";
           for (var i in librarys[isbn]['librarys']) {
               var libraryName = librarys[isbn]['librarys'][i]['libraryName'];
+              var libraryAddress = librarys[isbn]['librarys'][i]['address'];
               libraryNames.push(libraryName);
+              libraryAddresses.push(libraryAddress);
               libraryNamesSplitByComma += libraryName + ',';
               querySplitByComma += libraryName + '+' + '外観' + ',';
           }
@@ -26,6 +28,7 @@ $(function () {
             librarys[isbn]['librarys'][i]['image_url'] = imageURLs[i];
             $('.library-infos').append(formatLibraryInfo(librarys[isbn]['librarys'][i]));
           }
+          $('#book-infos').append(formatBookInfo(librarys[isbn]));
       }
       //ローディング画面OFF
       $("#loading").hide();
@@ -35,10 +38,10 @@ $(function () {
   });
 
   //ルート検索のボタンがクリックされた時
-  $(document).on('click', '.root-btn', function() {
-      var library = $(this).parents('.library-info').find('.library-name').text()
-      searchRoute(library);
-  })
+  $(document).on('click', '.root-btn', function () {
+      var address= $(this).parents('.library-info').find('p').text();
+      drawRoute(address);
+  });
 
   //初期表示でマップに現在位置を表示
   window.onload = initMap();
