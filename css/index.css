@@ -18,11 +18,11 @@ h1 {
   font-size: 1.25rem;
   font-weight: bold;
   color: #fff;
-  border-right: 2px solid rgba(255,255,255,.75);
+  border-right: 2px solid transparent;
   overflow: hidden;
   white-space: nowrap;
-  animation: typing 4s steps(44) 1s 1 normal both,
-  caret 500ms steps(44) infinite normal;
+  animation: typing 4s steps(44) 2s 1 normal,
+  caret 500ms steps(44) 16 normal;
 }
 @keyframes typing { 
   from { width: 0; } 
@@ -51,6 +51,10 @@ h1 {
   background-color: #d9de84;
   color: #555;
 }
+.custom-nav .btn:hover {
+  background-color: #c3c773;
+  color: #fff;
+}
 
 /****** メイン ******/
 .left-contents {
@@ -74,6 +78,7 @@ h1 {
   border-width: 15px 15px 0 0;
   border-style: solid;
   border-color: #000 transparent transparent transparent;
+  z-index: 50;
 }
 .caption:after {
   position: absolute;
@@ -85,12 +90,13 @@ h1 {
   border-width: 10px 10px 0 0;
   border-style: solid;
   border-color: #fff transparent transparent transparent;
+  z-index: 60;
 }
 
 /* 図書館情報（一覧） */
 .scroll {
   overflow-y: scroll;
-  height: calc(100vh - 56px - 16px - 425px);
+  height: 821px;
 }
 .library-info {
   border: 1px solid #777;
@@ -117,9 +123,6 @@ h1 {
 }
 
 /* 本の情報 */
-#book-infos {
-  border: 1px solid #777;
-}
 .back {
   background-color: #d9de84;
 }
@@ -172,14 +175,41 @@ h1 {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid #aaa;
-  color: #555;
+  border: 2px solid #222;
+  color: #222;
   background-color: #ddd;
 }
 .mobile-btn:hover {
   background-color: #d9de84;
   border: 2px solid #d9de84;
 }
+#cafe-btn {
+  background-color: #F3D389;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 200;
+}
+#cafe-btn:hover {
+  background-color: #CB9F3B;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.cafe-caption {
+  width: 120px;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  visibility: hidden;
+  background-color: rgba(255,255,255,.9);
+  border: 2px solid #CB9F3B; 
+  color: #222;
+  z-index: 200;
+}
+#cafe-btn:hover ~ .cafe-caption {
+  visibility: visible;
+}
+
 
 /* スクロールバー */
 .scroll::-webkit-scrollbar{
