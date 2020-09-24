@@ -1,7 +1,6 @@
 var pin = [];
 var infoWindow = [];
-var pinData = [];//[{name: "ナビタイム ", lat: 35.689614, lng: 139.691634}]
-var libraryData = [];
+var pinData = [];
 var libraryNames = [];
 var libraryAddresses = [];
 
@@ -16,9 +15,6 @@ function pinMap() {
           .then(connectPinSuccess)
           .catch(connectPinFailure);
   });
-  console.log(pinData);
-  console.log(libraryNames);
-  console.log(libraryData);
 }
 
 /**
