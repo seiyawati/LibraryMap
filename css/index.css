@@ -54,10 +54,44 @@ h1 {
 
 /****** メイン ******/
 .left-contents {
-  overflow-y: scroll;
   height: calc(100vh - 56px - 16px);
 }
+.caption {
+  position: relative;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 2px solid #000;
+  font-weight: bold;
+  color: #000;
+}
+.caption:before {
+  position: absolute;
+  right: 50px;
+  bottom: -15px;
+  width: 0;
+  height: 0;
+  content: '';
+  border-width: 15px 15px 0 0;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+}
+.caption:after {
+  position: absolute;
+  right: 53px;
+  bottom: -10px;
+  width: 0;
+  height: 0;
+  content: '';
+  border-width: 10px 10px 0 0;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
 /* 図書館情報（一覧） */
+.scroll {
+  overflow-y: scroll;
+  height: calc(100vh - 56px - 16px - 425px);
+}
 .library-info {
   border: 1px solid #777;
   font-size: 0.85rem;
@@ -82,24 +116,38 @@ h1 {
   border-radius: 5px;
 }
 
-/* 図書館情報（詳細） */
-.library-details h2{
-  font-size: 1.3rem;
+/* 本の情報 */
+#book-infos {
+  border: 1px solid #777;
+}
+.back {
   background-color: #d9de84;
 }
-.library-details h3{
-  font-size: 1rem;
+.book-main-info {
+  position: relative;
+  padding: 1rem;
+  background: #fff;
 }
-.cafe-btn {
+.book-main-info:before {
+  position: absolute;
+  top: -3px;
+  left: -3px;
   width: 100%;
-  font-size: 0.75rem;
-  background-color: #FCF4C2;
-  border: 1px solid #777;
-  border-radius: 5px;
+  height: 100%;
+  content: '';
+  border: 2px solid #000;
 }
-.img-box {
-  width: 100%;
-  height: 200px;
+.img-fit {
+  height: 120px;
+  object-fit: contain;
+}
+#book-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+#publisher {
+  color: #555;
+  font-size: 0.7rem;
 }
 
 /* 地図 */
@@ -134,14 +182,14 @@ h1 {
 }
 
 /* スクロールバー */
-.left-contents::-webkit-scrollbar{
+.scroll::-webkit-scrollbar{
   width: 10px;
 }
-.left-contents::-webkit-scrollbar-track{
+.scroll::-webkit-scrollbar-track{
   background: #fff;
   border-left: solid 1px #ececec;
 }
-.left-contents::-webkit-scrollbar-thumb{
+.scroll::-webkit-scrollbar-thumb{
   background: #ccc;
   border-radius: 10px;
   box-shadow: inset 0 0 0 2px #fff;
