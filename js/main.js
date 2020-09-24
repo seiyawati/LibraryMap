@@ -1,6 +1,10 @@
 $(function () {
     $("#loading").hide();
     $('#search_books').click(function () {
+        //ローディング画面ON
+        $("#loading").show();
+        //地図上の情報を空にする
+        refreshMap();
         //要素を空にする
         $(".library-infos").empty();
         $("#book-infos").empty();
