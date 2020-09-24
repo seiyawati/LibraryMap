@@ -13,6 +13,26 @@ ul {
 }
 
 /****** ヘッダー ******/
+h1 {
+  width: 28.5em;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  border-right: 2px solid rgba(255,255,255,.75);
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 4s steps(44) 1s 1 normal both,
+  caret 500ms steps(44) infinite normal;
+}
+@keyframes typing { 
+  from { width: 0; } 
+  to { width: 28.5em; }
+}
+@keyframes caret { 
+  from { border-right-color: rgba(255,255,255,.75); } 
+  to { border-right-color: transparent; }
+}
+
 .custom-nav {
   background-color: #9ac29f;
 }
