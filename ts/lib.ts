@@ -1,7 +1,7 @@
 let libraryInfomationView = `
 <div class="p-2 library-info">
 <a href="{url}" class="library-name" target="_blank">{library_name}</a>
-<p class="">{address}</p>
+<p class="address">{address}</p>
 <div class="row no-gutters">
 <div class="col-12 col-md-6 text-center pr-2"><img src="{image_url}" class="w-100"></div>
 <div class="col-12 col-md-6 p-0">
