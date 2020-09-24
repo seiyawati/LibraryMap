@@ -15,7 +15,7 @@ $(function () {
                 var querySplitByComma = "";
                 for (var i in librarys[isbn]['librarys']) {
                     var libraryName = librarys[isbn]['librarys'][i]['libraryName'];
-                    var libraryAddress = librarys[isbn]['librarys'][i]['libraryName'];
+                    var libraryAddress = librarys[isbn]['librarys'][i]['address'];
                     libraryNames.push(libraryName);
                     libraryAddresses.push(libraryAddress);
                     libraryNamesSplitByComma += libraryName + ',';
