@@ -7,7 +7,6 @@ function drawRoute(address) {
 }
 
 function searchRoute(response) {
-    // var routeSpot = pinData.find(spot => spot.name === library);
     var routeSpot = response.data.items[0];
     var routeUrl = `https://api-service.instruction.cld.dev.navitime.co.jp/teamc/v1/shape_transit?start=${userPosition[0]},${userPosition[1]}&goal=${routeSpot.coord.lat},${routeSpot.coord.lon}&start_time=2020-09-20T09:00:00&options=transport_shape`;
     axios

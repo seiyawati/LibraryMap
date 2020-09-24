@@ -32,11 +32,10 @@ $(function () {
         $("#loading").hide();
         //マップにピンを立てる
         pinMap();
-        console.log(librarys);
     });
     //ルート検索のボタンがクリックされた時
     $(document).on('click', '.root-btn', function () {
-        var  address= $(this).parents('.library-info').find('.address').text();
+        var address= $(this).parents('.library-info').find('p').text();
         drawRoute(address);
     });
     //初期表示でマップに現在位置を表示
