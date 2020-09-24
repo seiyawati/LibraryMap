@@ -15,7 +15,10 @@ function bookNamesToISBNs(bookNames) {
             ++i;
         var ISBN = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
         var imageURL = (typeof response.items[i].volumeInfo.imageLinks === "undefined") ? '' : response.items[i].volumeInfo.imageLinks.thumbnail;
-        bookInfomaitons.push({ 'isbn': ISBN, 'image_url': imageURL });
+        var author = response.items[i].volumeInfo.authors;
+        var publisher = response.items[i].volumeInfo.publisher;
+        var bookNameByGoogle = response.items[i].volumeInfo.title;
+        bookInfomaitons.push({ 'book_name': bookNameByGoogle, 'isbn': ISBN, 'image_url': imageURL, 'author': author, 'publisher': publisher });
     }
     return bookInfomaitons;
 }
@@ -99,8 +102,10 @@ function searchLibrarys(bookNames, userPosition) {
     var bookInfomaitons = bookNamesToISBNs(bookNames);
     var librarys = searchLibrarysByISBNs(bookInfomaitons, userPosition);
     for (var i in bookInfomaitons) {
-        librarys[bookInfomaitons[i]['isbn']]['book_name'] = bookNames[i];
+        librarys[bookInfomaitons[i]['isbn']]['book_name'] = bookInfomaitons[i]['book_name'];
         librarys[bookInfomaitons[i]['isbn']]['book_image_url'] = bookInfomaitons[i]['image_url'];
+        librarys[bookInfomaitons[i]['isbn']]['authors'] = bookInfomaitons[i]['author'];
+        librarys[bookInfomaitons[i]['isbn']]['publisher'] = bookInfomaitons[i]['publisher'];
     }
     return librarys;
 }
