@@ -21,23 +21,20 @@
   <main>
     <div class="container-fluid">
       <div class="row px-3">
-        <div class="col-lg-2 p-1 d-none d-lg-block left-contents">
+        <div class="col-md-6 col-lg-2 p-1 d-none d-lg-block left-contents order-2 order-lg-1">
           <div class="col-12 caption">検索した本の情報</div>
           <div id="book-infos" class="pt-3 text-center scroll">
           </div>
         </div>
-        <div class="col-lg-2 p-1 d-none d-lg-block middle-contents">
+        <div class="col-md-6 col-lg-2 p-1 d-none d-lg-block middle-contents order-3 order-lg-2">
           <div class="col-12 caption">この本がある図書館</div>
           <div class="scroll">
             <div class="library-infos"></div>
           </div>
         </div>
-        <div class="col-lg-8 right-contents">
+        <div class="col-lg-8 right-contents order-1 order-lg-3">
           <div id="map"></div>
-          <button id="cafe-btn" class="mobile-btn"><i class="fas fa-coffee"></i></button>
-          <div class="p-2 cafe-caption">近くのカフェを表示します</div>
           <div class="d-lg-none btn-group d-flex flex-column">
-            <button id="nowposition-btn" class="mb-2 mobile-btn"><i class="fas fa-location-arrow"></i></button>
             <button id="list-btn" class="mobile-btn"><i class="fas fa-list"></i></button>
           </div>
         </div>
