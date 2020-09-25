@@ -13,6 +13,9 @@ $(function () {
         $('#book-infos').append(formatBookInfo(bookNamesToISBNs(bookNames)[0]));
         //ローディング画面ON
         $("#loading").show();
+        $(".left-contents").addClass("d-lg-block");
+        $(".middle-contents").addClass("d-lg-block");
+        $(".right-contents").addClass("col-lg-8");
         setTimeout(function () {
             //近隣の図書館で，蔵書が有る図書館を取得
             var librarys = searchLibrarys(bookNames, getUserPosition());

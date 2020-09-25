@@ -11,7 +11,7 @@
 <body>
   <header class="mb-3">
     <nav class="navbar custom-nav">
-      <h1 id="navbar-brand" class="mb-0">本のタイトルを入力すると蔵書の有る図書館を表示するマップ</h1>
+      <h1 id="navbar-brand" class="mb-2 mb-lg-0 ">本のタイトルを入力すると貸し出し可能な図書館を表示するマップ</h1>
       <div class="d-flex">
         <input id="book_names" class="form-control" type="text" name="book_names" placeholder="本のタイトルを入力してください" aria-label="Search">
         <button id="search_books" class="btn" type="button" name="search_books"><i class="fas fa-search"></i></button>
@@ -21,18 +21,18 @@
   <main>
     <div class="container-fluid">
       <div class="row px-3">
-        <div class="col-md-6 col-lg-2 p-1 d-none d-lg-block left-contents order-2 order-lg-1">
+        <div class="col-md-6 col-lg-2 p-1 d-none left-contents order-2 order-lg-1">
           <div class="col-12 caption">検索した本の情報</div>
           <div id="book-infos" class="pt-3 text-center scroll">
           </div>
         </div>
-        <div class="col-md-6 col-lg-2 p-1 d-none d-lg-block middle-contents order-3 order-lg-2">
+        <div class="col-md-6 col-lg-2 p-1 d-none middle-contents order-3 order-lg-2">
           <div class="col-12 caption">この本がある図書館</div>
           <div class="scroll">
             <div class="library-infos"></div>
           </div>
         </div>
-        <div class="col-lg-8 right-contents order-1 order-lg-3">
+        <div class="col-12 right-contents order-1 order-lg-3">
           <div id="map"></div>
           <div class="d-lg-none btn-group d-flex flex-column">
             <button id="list-btn" class="mobile-btn"><i class="fas fa-list"></i></button>

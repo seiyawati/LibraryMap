@@ -14,19 +14,19 @@ ul {
 
 /****** ヘッダー ******/
 h1 {
-  width: 28.5em;
+  width: 30.5em;
   font-size: 1.25rem;
   font-weight: bold;
   color: #fff;
   border-right: 2px solid transparent;
   overflow: hidden;
   white-space: nowrap;
-  animation: typing 4s steps(44) 2s 1 normal,
-  caret 500ms steps(44) 16 normal;
+  animation: typing 5s steps(44) 2s 1 normal,
+  caret 500ms steps(44) 18 normal;
 }
 @keyframes typing { 
   from { width: 0; } 
-  to { width: 28.5em; }
+  to { width: 30.5em; }
 }
 @keyframes caret { 
   from { border-right-color: rgba(255,255,255,.75); } 
@@ -58,7 +58,7 @@ h1 {
 
 /****** メイン ******/
 .left-contents {
-  height: calc(100vh - 56px - 16px);
+  height: calc(100vh - 56px - 20px);
 }
 .caption {
   position: relative;
@@ -96,7 +96,7 @@ h1 {
 /* 図書館情報（一覧） */
 .scroll {
   overflow-y: scroll;
-  height: 821px;
+  height: calc(100vh - 56px - 20px - 48px);
 }
 .library-info {
   border: 1px solid #777;
