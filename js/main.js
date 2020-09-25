@@ -20,8 +20,9 @@ $(function () {
                 var libraryNamesSplitByComma = "";
                 var querySplitByComma = "";
                 for (var i in librarys[isbn]['librarys']) {
+                    librarysArr.push(librarys[isbn]['librarys'][i]);
                     var libraryName = librarys[isbn]['librarys'][i]['libraryName'];
-                    var libraryAddress = librarys[isbn]['librarys'][i]['address'];
+                    var libraryAddress = librarys[isbn]['librarys'][i]['address'].replace(/\s+/g, "");
                     libraryNames.push(libraryName);
                     libraryAddresses.push(libraryAddress);
                     libraryNamesSplitByComma += libraryName + ',';
