@@ -47,6 +47,10 @@ $(function () {
         var address = $(this).parents('.library-info').find('p').text();
         drawRoute(address);
     });
+    $(document).on('click', '#list-btn', function () {
+        $(".left-contents").removeClass("d-none");
+        $(".middle-contents").removeClass("d-none");
+    });
     //初期表示でマップに現在位置を表示
     window.onload = initMap();
 });

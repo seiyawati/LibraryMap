@@ -4,6 +4,8 @@ var pinData = [];
 var libraryNames = [];
 var libraryAddresses = [];
 var librarysArr = [];
+var flag = -1;
+
 
 /**
  * 検索ボタンがクリックされた時に初期化
@@ -18,16 +20,11 @@ function refreshMap() {
   document.getElementById('map').innerHTML = '';
   map = new navitime.geo.Map('map', current, 12);
   current_pin = new navitime.geo.overlay.Pin({
-  icon:'./images/pin.png',
+  icon:'./images/now_pin.png',
   position:current,
   draggable:false,
   map:map,
   title:'現在位置'
-  });
-  current_infoWindow = new navitime.geo.overlay.InfoWindow({
-    map:map,
-    position:current,
-    content:'現在位置'
   });
 }
 
@@ -103,7 +100,13 @@ function displayPin() {
  */
 function pinEvent(i) {
   new navitime.geo.util.addListener(pin[i] , "click" , function(){
-    infoWindow[i].setVisible(true);
+    if(flag == -1) {
+      infoWindow[i].setVisible(true);
+  } else {
+      infoWindow[flag].setVisible(false);
+      infoWindow[i].setVisible(true);
+  }
+  flag = i;
   });
 }
 

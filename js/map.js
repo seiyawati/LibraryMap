@@ -26,16 +26,11 @@ function success(position) {
   document.getElementById('map').innerHTML = '';
   map = new navitime.geo.Map('map', current, 12);
   current_pin = new navitime.geo.overlay.Pin({
-  icon:'./images/pin.png',
+  icon:'./images/now_pin.png',
   position:current,
   draggable:false,
   map:map,
   title:'現在位置'
-  });
-  current_infoWindow = new navitime.geo.overlay.InfoWindow({
-    map:map,
-    position:current,
-    content:'現在位置'
   });
 }
 
