@@ -3,16 +3,19 @@ var infoWindow = [];
 var pinData = [];
 var libraryNames = [];
 var libraryAddresses = [];
+var librarysArr = [];
 var flag = -1;
+
 
 /**
  * 検索ボタンがクリックされた時に初期化
  */
 function refreshMap() {
-  pinData = [];
-  libraryAddresses = [];
   pin = [];
   infoWindow = [];
+  pinData = [];
+  librarysArr = [];
+  libraryAddresses = [];
   var current = new navitime.geo.LatLng(userPosition[0], userPosition[1]);
   document.getElementById('map').innerHTML = '';
   map = new navitime.geo.Map('map', current, 12);
@@ -32,8 +35,9 @@ function pinMap() {
   var baseUrl = 'https://api-service.instruction.cld.dev.navitime.co.jp/teamc/v1';
   libraryAddresses.forEach(libraryAddress => {
       axios
-          .get(baseUrl + `/spot?word=${libraryAddress}`)
-          .then(connectPinSuccess);
+          .get(baseUrl + `/address?word=${libraryAddress}`)
+          .then(connectPinSuccess)
+          .catch(connectPinFailure);
   });
 }
 
@@ -44,9 +48,29 @@ function connectPinSuccess(response) {
   var spot = response.data.items[0];
   var spot_lat = spot.coord.lat;
   var spot_lng = spot.coord.lon;
-  var spot_name = spot.name.replace(/\s+/g, "");
-  pinData.push({name: spot_name, lat: spot_lat, lng: spot_lng});
+  var spot_name = spot.name.replace("丁目", "-");
+  var library_name = librarysArr.find(library => splitAddress(library) === spot_name);
+  pinData.push({name: library_name.libraryName, lat: spot_lat, lng: spot_lng});
   displayPin();
+}
+
+/**
+ * カーリルの住所表記とnavitimeの住所表記を一致させる関数
+ */
+function splitAddress(library) {
+  var pos = library.address.indexOf(" ");
+  if(pos < 0) {
+    return library.address;
+  } else {
+    return library.address.substring(0, pos);
+  }
+}
+
+/**
+ * APIにアクセスできなかった時に呼ぶ関数
+ */
+function connectPinFailure(error) {
+  console.log(error);
 }
 
 /**
