@@ -1,5 +1,5 @@
 var map;
-var userPosition = [];//ユーザーの現在位置
+var userPosition = ['35.689614', '139.691634'];//ユーザーの現在位置
 
 //現在位置の緯度軽度だけを返す関数
 function getUserPosition() {
